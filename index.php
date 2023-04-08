@@ -3,12 +3,18 @@
 error_reporting(E_ALL);
 
 require_once 'autoloader.php';
+require_once 'routes.php';
 
-use controllers\RouteController;
-use exceptions\RouteExceptions;
+use Controllers\RouterController;
+use Exceptions\RouteExceptions;
+use Helpers\RequestParsingHelper;
+
+
+
 
 try {
-    RouteController::getInstance()->route();
+    $requestParts = RequestParsingHelper::getRequestParts();
+    RouterController::getInstance()->route($routes, $requestParts);
 } catch (RouteExceptions $e){
     exit ($e->getMessage());
 }
