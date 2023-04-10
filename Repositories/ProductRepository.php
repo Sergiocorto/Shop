@@ -30,17 +30,29 @@ class ProductRepository implements RepositoryInterface
         return $stmt->fetchAll(PDO::FETCH_ASSOC);  
     }
 
+
+	 /**
+    * @return ProductEntity
+    */
     public function getById($id)
     {
-        $sql = "SELECT * FROM products WHERE id = :id";
-        $stmt = $this->conn->prepare($sql);
-
-        $stmt->bindParam(':id', $id);
-        $stmt->execute();
+    	try
+    	{
+    		$sql = "SELECT * FROM products WHERE id = :id";
+         $stmt = $this->conn->prepare($sql);
+         $stmt->bindParam(':id', $id);
+         $stmt->execute();
         
-        return $stmt->fetch(PDO::FETCH_ASSOC);  
+         return $stmt->fetch(PDO::FETCH_ASSOC);
+    	} catch (\PDOException $e)
+      {
+          throw new \PDOException($e->getMessage(), (int)$e->getCode());
+      }
     }
 
+	 /**
+    * @return ProductEntity
+    */
     public function add($product)
     {
         $sql = "SELECT * FROM products WHERE title = :title";
@@ -78,9 +90,11 @@ class ProductRepository implements RepositoryInterface
         }
     }
 
+	 /**
+    * @return ProductEntity
+    */
     public function update($product)
     {
-
         try
         {
             $sql = "UPDATE products SET title = :title, description = :description, categoryId = :categoryId, cost = :cost WHERE id = :id";
@@ -108,9 +122,10 @@ class ProductRepository implements RepositoryInterface
 
     public function delete($id)
     {
-        print_r($id);
         try
         {
+			if(!$this->getById($id)) throw new \Exception('Product is id = '.$id.' not find');
+        
             $sql = "DELETE FROM products WHERE id = :id";
             $stmt = $this->conn->prepare($sql);
             
@@ -118,7 +133,7 @@ class ProductRepository implements RepositoryInterface
             
             $result = $stmt->execute();
             
-            if ($result) print_r(json_encode("Product successfully deleted"));
+            if ($result) return print_r(json_encode("Product successfully deleted"));
 
         } catch (\PDOException $e)
         {

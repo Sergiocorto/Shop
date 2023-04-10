@@ -8,10 +8,22 @@ $routes = [
         'repository' => 'Repositories\ProductRepository',
         'actions' =>
         [
-            'page' => 'getProductsView',
-            'add' => 'addProduct',
-            'update' => 'updateProduct',
-            'delete' => 'deleteProduct'
+            'page' => [
+                       'requestMethod' => 'GET',
+                       'method' => 'getProductsView'
+                       ],
+            'add' => [
+                       'requestMethod' => 'POST',
+                       'method' => 'addProduct'
+            			],
+            'update' => [
+                       'requestMethod' => 'PUT',
+                       'method' => 'updateProduct'
+            			],
+            'delete' => [
+                       'requestMethod' => 'DELETE',
+                       'method' => 'deleteProduct'
+            			],
         ]
     ],
 ];
