@@ -7,7 +7,7 @@ use Interfaces\ProductInterface;
 class ProductController
 {
 
-    private $product;
+    private ProductInterface $product;
 
     public function __construct(ProductInterface $product)
     {
@@ -26,7 +26,7 @@ class ProductController
 
     public function updateProduct($product)
     {
-        if($this->product->updateProduct($product));
+        $this->product->updateProduct($product);
     }
 
     public function deleteProduct($param)
