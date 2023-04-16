@@ -2,14 +2,12 @@
 
 namespace Controllers;
 
-use Interfaces\ProductInterface;
-
 class ProductController
 {
 
-    private ProductInterface $product;
+    private $product;
 
-    public function __construct(ProductInterface $product)
+    public function __construct($product)
     {
         $this->product = $product;
     }
