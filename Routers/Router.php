@@ -1,8 +1,10 @@
 <?php
 namespace Routers;
 
+use Helpers\GenerateQueryStringHelper;
 use Interfaces\RouterInterface;
 use Models\Db;
+use Repositories\Repository;
 
 class Router implements RouterInterface
 {
@@ -29,11 +31,13 @@ class Router implements RouterInterface
             $controller = $this->routes[$modelName]['controller'];
             $model = $this->routes[$modelName]['model'];
             $repository = $this->routes[$modelName]['repository'];
+            $tableName = $this->routes[$modelName]['tableName'];
             $method = $this->routes[$modelName]['actions'][$action]['method'];
             $data = $requestParts['body'] ?? $requestParts['params'];
 
-           (new $controller(new $model(new $repository(new Db()))))->$method($data);
-        } 
-        print_r("404");
+           (new $controller(new $model(new $repository(new Repository(new Db(), new GenerateQueryStringHelper(), $tableName)))))->$method($data);
+        } else {
+            print_r('404');
+        }
     }
 }

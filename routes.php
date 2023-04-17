@@ -6,6 +6,7 @@ $routes = [
         'controller' => 'Controllers\ProductController',
         'model' => 'Models\Product',
         'repository' => 'Repositories\ProductRepository',
+        'tableName' => 'products',
         'actions' =>
         [
             'page' => [

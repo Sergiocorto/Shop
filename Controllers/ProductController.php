@@ -14,7 +14,7 @@ class ProductController
 
     public function getProductsView()
     {
-        $this->product->getProducts();
+        print_r($this->product->getProducts());
     }
 
     public function addProduct($product)

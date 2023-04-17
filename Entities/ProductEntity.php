@@ -5,11 +5,11 @@ namespace Entities;
 
 class ProductEntity
 {
-    private $id;
-    private $title;
-    private $description;
-    private $categoryId;
-    private $cost;
+    private int $id;
+    private string $title;
+    private string $description;
+    private int $categoryId;
+    private int $cost;
 
     public function __construct($id, $title, $description, $categoryId, $cost)
     {

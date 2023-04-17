@@ -3,24 +3,20 @@
 namespace Models;
 
 use Interfaces\ProductInterface;
-use Interfaces\RepositoryInterface;
+use Repositories\ProductRepository;
 
 class Product implements ProductInterface
 {
     private $repository;
 
-    public function __construct(RepositoryInterface $repository)
+    public function __construct(ProductRepository $repository)
     {
         $this->repository = $repository;   
     }    
 
-    /**
-    * @return ProductEntity[]
-    */
-    public function getProducts()
+    public function getProducts(): array
     {
         return $this->repository->getAll();
-        //print_r($data['page']);
     }
 
     public function addProduct($product)
