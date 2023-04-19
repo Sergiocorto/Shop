@@ -27,4 +27,30 @@ $routes = [
             			],
         ]
     ],
+    'categories' =>
+        [
+            'controller' => 'Controllers\CategoryController',
+            'model' => 'Models\Category',
+            'repository' => 'Repositories\CategoryRepository',
+            'tableName' => 'categories',
+            'actions' =>
+                [
+                    'page' => [
+                        'requestMethod' => 'GET',
+                        'method' => 'getCategoriesView'
+                    ],
+                    'add' => [
+                        'requestMethod' => 'POST',
+                        'method' => 'addCategory'
+                    ],
+                    'update' => [
+                        'requestMethod' => 'PUT',
+                        'method' => 'updateCategory'
+                    ],
+                    'delete' => [
+                        'requestMethod' => 'DELETE',
+                        'method' => 'deleteCategory'
+                    ],
+                ]
+        ],
 ];
